@@ -1,0 +1,13 @@
+---
+# tasks file for ansible-role-cert-manager
+
+# configue tiller connectivity if required
+- include: tiller.yml
+  when: l_helm_host is not defined or l_helm_port is not defined
+
+# install cert-manager helm chart
+- include: cert-manger.yml
+
+# this will use an opinionated ClusterIussuer using Cloudflare DNS01
+- include: cluster-issuer.yml
+  when: cert_manager_cluster_issuer | bool

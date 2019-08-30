@@ -1,0 +1,10 @@
+---
+- name: add cloudlfare secret
+  k8s:
+    state: present
+    definition: "{{ lookup('template', 'secret-cloudflare.yml.j2') }}"
+
+- name: add ClusterIssuer
+  k8s:
+    state: present
+    definition: "{{ lookup('template', 'cluster-issuer.yml.j2') }}"

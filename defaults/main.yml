@@ -1,0 +1,24 @@
+---
+# defaults file for ansible-role-cert-manager
+cert_manager_cluster_issuer: false
+
+cloudflare_email: noe.a.gonzalez@gmail.com
+cloudflare_api_key: abcdef123456
+
+letsencrypt_env: staging
+letsencrypt_url: https://acme-staging-v02.api.letsencrypt.org/directory
+
+cert_manager_required_manifests:
+  - https://raw.githubusercontent.com/jetstack/cert-manager/{{ cert_manager_helm_chart.version }}/deploy/manifests/00-crds.yaml
+  - https://raw.githubusercontent.com/jetstack/cert-manager/{{ cert_manager_helm_chart.version }}/deploy/manifests/01-namespace.yaml
+
+cert_manager_helm_chart:
+  name: cert-manager
+  version: v0.9.1
+  release: cert-manager
+  namespace: cert-manager
+  source:
+    type: repo
+    location: https://charts.jetstack.io
+  state: present
+  values: {}
